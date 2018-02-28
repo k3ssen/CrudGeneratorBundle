@@ -1,0 +1,41 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% block delete_action %}
+
+{% block annotations %}
+    /**
+    * @Route("/{{ '{' ~ id_name ~ '}' }}/delete", name="{{ route_prefix }}_delete")
+    * @Method({"GET", "DELETE"})
+    */
+{% endblock %}
+{% block method_definition %}
+    public function deleteAction(Request $request, {{ meta_entity.name }} ${{ entity_variable }}): Response
+{% endblock %}
+    {
+{% block security_check %}{# might be used for overriding #}{% endblock %}
+{% block form_creation %}
+        $form = $this->createFormBuilder()->setMethod('DELETE')->getForm();
+{% endblock %}
+{% block form_handling %}
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+{% block save_entity %}
+            $em = $this->getDoctrine()->getManager();
+            $em->remove(${{ entity_variable }});
+            $em->flush();
+{% endblock %}
+{% block flash_message %}
+            $this->addFlash('success', '{{ meta_entity.name }} has been deleted');
+{% endblock %}
+{% block redirect_response %}
+            return $this->redirectToRoute('{{ route_prefix }}_index');
+{% endblock %}
+        }
+{% endblock %}
+{% block return_response %}
+        return $this->render('{{ view_prefix }}/delete.html.twig', [
+            '{{ meta_entity.name | tabalize }}' => ${{ entity_variable }},
+            'form' => $form->createView(),
+        ]);
+{% endblock %}
+    }
+{% endblock delete_action %}

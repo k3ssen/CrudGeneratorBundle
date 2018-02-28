@@ -1,0 +1,42 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% set entity_singularized = meta_entity.name|tabalize %}
+{{ "{# @var "~entity_singularized~" \\"~meta_entity.fullClassName~" #}" }}
+{{ "{% extends 'base.html.twig' %}" }}
+
+{{ "{% block body %}" }}
+{% for property in meta_entity.properties %}
+{# @var property \K3ssen\MetaEntityBundle\MetaData\Property\MetaPropertyInterface #}
+    <div class="form-group row">
+        <span class="col-2 col-form-label">
+            {{ property.name }}
+        </span>
+        <div class="col-10">
+        {%- if property.ormType in ['datetime'] %}
+
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}
+
+        {%- elseif property.ormType in ['date'] %}
+
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}
+
+        {%- elseif property.ormType in ['time'] %}
+
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}
+
+        {%- elseif property.ormType in ['array'] %}
+
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}
+
+        {%- elseif property.ormType in ['boolean'] %}
+
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}
+
+        {%- else %}
+
+            {{ '{{ ' ~ entity_singularized ~ '.' ~ property.name|replace({'_': ''}) ~ ' }}' }}
+
+        {%- endif %}
+        </div>
+    </div>
+{% endfor %}
+{{ "{% endblock %}" }}

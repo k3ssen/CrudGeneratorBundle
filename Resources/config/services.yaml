@@ -1,0 +1,13 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $projectDir: '%kernel.project_dir%'
+
+    K3ssen\CrudGeneratorBundle\:
+        resource: '../../*'
+        exclude: '../../{Entity,Migrations,Tests}'

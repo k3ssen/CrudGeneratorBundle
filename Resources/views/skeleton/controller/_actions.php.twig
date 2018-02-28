@@ -1,0 +1,12 @@
+{% use '@CrudGenerator/skeleton/controller/_index_action.php.twig' %}
+{% use '@CrudGenerator/skeleton/controller/_show_action.php.twig' %}
+{% use '@CrudGenerator/skeleton/controller/_new_action.php.twig' %}
+{% use '@CrudGenerator/skeleton/controller/_edit_action.php.twig' %}
+{% use '@CrudGenerator/skeleton/controller/_delete_action.php.twig' %}
+{% block actions %}
+{% block index_action %}{{ parent() }}{% endblock %}
+{% block show_action %}{{ parent() }}{% endblock %}
+{% block new_action %}{{ parent() }}{% endblock %}
+{% block edit_action %}{{ parent() }}{% endblock %}
+{% block delete_action %}{{ parent() }}{% endblock %}
+{% endblock %}

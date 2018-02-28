@@ -1,0 +1,15 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% set route_prefix = (meta_entity.subDir ? meta_entity.subDir|tabalize~'_': '') ~ (meta_entity.name| tabalize)  %}
+{% set id_name = meta_entity.idProperty ? meta_entity.idProperty.name | tabalize : 'id' %}
+{{ "{% extends 'base.html.twig' %}" }}
+
+{{ "{% block body %}" }}
+    {{ '{{ form_start(form) }}' }}
+    {{ '{{ form_widget(form) }}' }}
+    <p>
+        Are you sure you want to delete this {{ meta_entity.name }}?
+    </p>
+    <button class="btn btn-primary">Yes, delete</button>
+    <a href="{{ "{{ path('"~route_prefix ~"_show', {'"~id_name~"' : "~meta_entity.name | tabalize~"."~id_name~"}) }}" }}" class="btn btn-default">No, go back</a>
+    {{ '{{ form_end(form) }}' }}
+{{ "{% endblock %}" }}

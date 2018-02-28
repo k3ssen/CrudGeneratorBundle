@@ -1,0 +1,13 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% block index_action %}
+
+    /**
+    * @Route("/", name="{{ route_prefix }}_index")
+    */
+    public function indexAction({{ meta_entity.name }}Repository $repo): Response
+    {
+        return $this->render('{{ view_prefix }}/index.html.twig', [
+            '{{ meta_entity.name | pluralize | tabalize }}' => $repo->findAll(),
+        ]);
+    }
+{% endblock %}

@@ -1,0 +1,13 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% block show_action %}
+
+    /**
+    * @Route("/{{ '{' ~ id_name ~ '}' }}/show", name="{{ route_prefix }}_show")
+    */
+    public function showAction({{ meta_entity.name }} ${{ entity_variable }}): Response
+    {
+        return $this->render('{{ view_prefix }}/show.html.twig', [
+            '{{ meta_entity.name | tabalize }}' => ${{ entity_variable }},
+        ]);
+    }
+{% endblock %}

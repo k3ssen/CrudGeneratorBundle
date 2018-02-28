@@ -1,0 +1,28 @@
+{
+    "name": "k3ssen/crud-generator",
+    "description": "Generate crud for your symfony4 project",
+    "keywords": ["crud", "admin", "generator", "symfony", "symfony4"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Driessen",
+            "email": "k3ssen@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "k3ssen/entity-generator": "dev-master"
+    },
+    "suggest": {
+        "k3ssen/base-admin": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "K3ssen\\CrudGeneratorBundle\\": "" },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    }
+}

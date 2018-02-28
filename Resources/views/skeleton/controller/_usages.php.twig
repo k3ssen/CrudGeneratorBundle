@@ -1,0 +1,12 @@
+{# @var meta_entity \K3ssen\MetaEntityBundle\MetaData\MetaEntityInterface #}
+{% block usages %}
+use {{ meta_entity.fullClassName }};
+use {{ meta_entity.repositoryFullClassName }};
+use {{ meta_entity.fullClassName | replace({'\\Entity':'\\Form'}) }}Type;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
+{% endblock %}
