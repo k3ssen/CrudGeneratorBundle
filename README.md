@@ -1,5 +1,5 @@
 CrudGeneratorBundle
 =====================
 
-**WORK IN PROGRES: major changes are constantly being made at this moment**
+> ## This bundle is no longer maintained and will be removed in a while. Please checkout the [GeneratorBundle](https://github.com/k3ssen/GeneratorBundle) instead.
 
